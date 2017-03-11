@@ -2,9 +2,6 @@ package serenitylabs.tutorials.stockbroker;
 
 import serenitylabs.tutorials.stockbroker.parser.OrderParser;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Client {
     private final StockBroker broker;
     private final OrderParser parser;
@@ -16,8 +13,12 @@ public class Client {
 
     public String place(String orders) {
 
-        // looks like we're missing something here ;-)
+        String orderSummary = "";
 
-        return "Buy: USD 0.00, Sell: USD 0.00";
+        if (orders.isEmpty()) {
+            orderSummary = "Buy: USD 0.00, Sell: USD 0.00";
+        }
+
+        return orderSummary;
     }
 }
