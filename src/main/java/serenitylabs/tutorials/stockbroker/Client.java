@@ -17,8 +17,9 @@ public class Client {
 
         if (orders.isEmpty()) {
             orderSummary = "Buy: USD 0.00, Sell: USD 0.00";
+            return orderSummary;
         }
 
-        return orderSummary;
+        return null;
     }
 }
