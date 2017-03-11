@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -45,7 +46,7 @@ public class WhenUsingADummy {
         Authoriser authoriser = mock(Authoriser.class);
         System system = new System(authoriser);
 
-        when(authoriser.authorise(anyString(), anyString())).thenReturn(null);
+        given(authoriser.authorise(anyString(), anyString())).willReturn(null);
 
         try {
             //When
