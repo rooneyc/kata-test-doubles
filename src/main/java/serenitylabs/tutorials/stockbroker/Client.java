@@ -13,8 +13,9 @@ public class Client {
 
     public String place(String orders) {
 
-        // looks like we're missing something here ;-)
+        double bought = 0.00;
+        double sold = 0.00;
 
-        return "Buy: USD 0.00, Sell: USD 0.00";
+        return "Buy: USD " + String.format("%.2f", bought) +", Sell: USD " + String.format("%.2f", sold);
     }
 }
