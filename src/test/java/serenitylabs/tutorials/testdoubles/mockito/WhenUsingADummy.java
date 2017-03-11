@@ -1,13 +1,25 @@
 package serenitylabs.tutorials.testdoubles.mockito;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import serenitylabs.tutorials.testdoubles.Authoriser;
+import serenitylabs.tutorials.testdoubles.System;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class WhenUsingADummy {
 
     @Test
-    @Ignore("Implement me, please ...")
     public void we_do_not_worry_about_the_value_it_returns_because_we_know_it_will_never_be_used() {
+
+        //Given
+        Authoriser authoriser = mock(Authoriser.class);
+
+        //When
+        System system = new System(authoriser);
+
+        ///Then
+        assertThat(system.numberOfActiveUsers()).isEqualTo(0);
 
     }
 
