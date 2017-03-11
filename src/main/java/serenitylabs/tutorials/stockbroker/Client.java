@@ -30,6 +30,11 @@ public class Client {
                     * Double.parseDouble(orderParts.get(2));
         }
 
+        if ("S".equals(orderParts.get(3))) {
+            sold = Integer.parseInt(orderParts.get(1))
+                    * Double.parseDouble(orderParts.get(2));
+        }
+
         return "Buy: USD " + String.format("%.2f", bought) +", Sell: USD " + String.format("%.2f", sold);
 
     }
