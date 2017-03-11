@@ -23,19 +23,31 @@ public class Client {
         double bought = 0.00;
         double sold = 0.00;
 
-        List<String> orderParts = Arrays.asList(orders.split("\\s"));
+        List<String> orderStrings = Arrays.asList(orders.split(","));
 
-        if ("B".equals(orderParts.get(3))) {
-            bought = Integer.parseInt(orderParts.get(1))
-                    * Double.parseDouble(orderParts.get(2));
+        for (String orderString : orderStrings) {
+
+            List<String> orderParts = Arrays.asList(orderString.split("\\s"));
+
+            if ("B".equals(orderParts.get(3))) {
+                 bought = bought
+                         +
+                         (Integer.parseInt(orderParts.get(1))
+                         *
+                         Double.parseDouble(orderParts.get(2)));
+            }
+
+            if ("S".equals(orderParts.get(3))) {
+                  sold = sold
+                         +
+                         (Integer.parseInt(orderParts.get(1))
+                         * Double.parseDouble(orderParts.get(2)));
+            }
+
         }
 
-        if ("S".equals(orderParts.get(3))) {
-            sold = Integer.parseInt(orderParts.get(1))
-                    * Double.parseDouble(orderParts.get(2));
-        }
-
-        return "Buy: USD " + String.format("%.2f", bought) +", Sell: USD " + String.format("%.2f", sold);
+        return "Buy: USD " + String.format("%.2f", bought) +
+                ", Sell: USD " + String.format("%.2f", sold);
 
     }
 }

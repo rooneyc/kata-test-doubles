@@ -56,7 +56,7 @@ public class ClientTest {
         String orderSummary = client.place("GOOG 300 829.08 B,FB 320 137.17 S");
 
         //Then
-        assertThat(orderSummary).isEqualTo("Buy: USD 248724.00, Sell: USD 43894.4");
+        assertThat(orderSummary).isEqualTo("Buy: USD 248724.00, Sell: USD 43894.40");
     }
 
 }
