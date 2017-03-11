@@ -13,14 +13,16 @@ public class WhenUsingAMock {
     public void we_want_to_move_the_test_logic_from_the_test_to_the_mock_object() {
 
         //Given
+        final String userName = "BOB";
+        final String password = "SecretPassword";
         Authoriser authoriser = mock(Authoriser.class);
         System system = new System(authoriser);
 
         //When
-        system.login("bob", "SecretPassword");
+        system.login(userName, password);
 
         ///Then
-        verify(authoriser).authorise("bob", "SecretPassword");
+        verify(authoriser).authorise(userName, password);
 
     }
 }
