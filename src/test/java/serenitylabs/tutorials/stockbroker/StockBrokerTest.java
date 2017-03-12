@@ -129,7 +129,7 @@ public class StockBrokerTest {
         //And
         assertThat(orderSummary.buyTotal()).isEqualTo(Money.parse("USD 0.00"));
         //And
-        //assertThat(orderSummary.failedOrders()).contains(order);
+        assertThat(orderSummary.failedOrders()).contains(order);
     }
 
 }
