@@ -19,12 +19,15 @@ public class StockBroker {
 
         for (Order order : orders) {
 
-            if (order.type().equals(OrderType.Buy)) {
-                orderSummary.setBuyTotal(orderSummary.buyTotal().plus(order.price().multipliedBy(order.quantity())));
-            }
+            if (exchange.execute(order)) {
 
-            if (order.type().equals(OrderType.Sell)) {
-                orderSummary.setSellTotal(orderSummary.sellTotal().plus(order.price().multipliedBy(order.quantity())));
+                if (order.type().equals(OrderType.Buy)) {
+                    orderSummary.setBuyTotal(orderSummary.buyTotal().plus(order.price().multipliedBy(order.quantity())));
+                }
+
+                if (order.type().equals(OrderType.Sell)) {
+                    orderSummary.setSellTotal(orderSummary.sellTotal().plus(order.price().multipliedBy(order.quantity())));
+                }
             }
         }
 
