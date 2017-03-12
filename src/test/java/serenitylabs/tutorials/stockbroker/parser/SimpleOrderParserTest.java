@@ -34,7 +34,7 @@ public class SimpleOrderParserTest {
         Order parsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
 
         //When
-        List<Order> orders = orderParser.parse("GOOG 300 829.08 B");
+        List<Order> orders = orderParser.parse(orderString);
 
         //Then
         assertThat(orders).contains(parsedOrder);
