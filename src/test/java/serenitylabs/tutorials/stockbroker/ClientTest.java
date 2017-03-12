@@ -5,6 +5,7 @@ import org.junit.Test;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.parser.OrderParser;
+import serenitylabs.tutorials.stockbroker.parser.SimpleOrderParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +78,24 @@ public class ClientTest {
 
         //Then
         assertThat(orderSummary).isEqualTo("Buy: USD 248724.00, Sell: USD 43894.40");
+    }
+
+    @Test
+    public void should_be_able_to_place_a_multi_order() throws Exception {
+
+        //Given
+        String orderString = "ZNGA 1300 2.78 B,AAPL 50 139.78 B,FB 320 137.17 S";
+        Order firstParsedOrder = new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy);
+        Order secondParsedOrder = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
+        Order thirdParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
+        OrderParser orderParser = createMockedParser(orderString, firstParsedOrder, secondParsedOrder, thirdParsedOrder);
+        Client client = new Client(null, orderParser);
+
+        //When
+        String orderSummary = client.place(orderString);
+
+        //Then
+        assertThat(orderSummary).isEqualTo("Buy: USD 10603.00, Sell: USD 43894.40");
     }
 
     private OrderParser createMockedParser(String orderString, Order... orders){
