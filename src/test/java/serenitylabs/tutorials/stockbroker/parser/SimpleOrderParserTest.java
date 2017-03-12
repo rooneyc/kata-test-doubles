@@ -40,4 +40,19 @@ public class SimpleOrderParserTest {
         assertThat(orders).contains(parsedOrder);
     }
 
+    @Test
+    public void should_be_able_to_parse_a_single_sell_order() throws Exception {
+
+        //Given
+        String orderString = "FB 320 137.17 S";
+        SimpleOrderParser orderParser = new SimpleOrderParser();
+        Order parsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
+
+        //When
+        List<Order> orders = orderParser.parse(orderString);
+
+        //Then
+        assertThat(orders).contains(parsedOrder);
+    }
+
 }
