@@ -1,7 +1,7 @@
 package serenitylabs.tutorials.stockbroker;
 
-import org.joda.money.Money;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
+import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.exchange.StockExchange;
 
 import java.util.List;
@@ -13,24 +13,22 @@ public class StockBroker {
         this.exchange = exchange;
     }
 
-    public OrderSummary place(List<Order> orders) {
+    OrderSummary place(List<Order> orders) {
 
-        return new OrderSummary(){
+        OrderSummary orderSummary = new OrderSummary();
 
-            @Override
-            public Money buyTotal() {
-                return Money.parse("USD 0.00");
+        for (Order order : orders) {
+
+            if (order.type().equals(OrderType.Buy)) {
+                orderSummary.setBuyTotal(orderSummary.buyTotal().plus(order.price().multipliedBy(order.quantity())));
             }
 
-            @Override
-            public Money sellTotal() {
-                return Money.parse("USD 0.00");
-            }
+            if (order.type().equals(OrderType.Sell)) {
+                orderSummary.setSellTotal(orderSummary.sellTotal().plus(order.price().multipliedBy(order.quantity())));
 
-            @Override
-            public List<Order> failedOrders() {
-                return null;
             }
-        };
+        }
+
+        return orderSummary;
     }
 }

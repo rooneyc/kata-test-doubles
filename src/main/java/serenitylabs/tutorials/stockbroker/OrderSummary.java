@@ -5,8 +5,31 @@ import serenitylabs.tutorials.stockbroker.exchange.Order;
 
 import java.util.List;
 
-public interface OrderSummary {
-    Money buyTotal();
-    Money sellTotal();
-    List<Order> failedOrders();
+public class OrderSummary implements OrderSummaryInterface {
+
+    private Money buyTotal = Money.parse("USD 0.00");
+    private Money sellTotal = Money.parse("USD 0.00");
+
+    @Override
+    public Money buyTotal() {
+        return buyTotal;
+    }
+
+    @Override
+    public Money sellTotal() {
+        return sellTotal;
+    }
+
+    @Override
+    public List<Order> failedOrders() {
+        return null;
+    }
+
+    void setBuyTotal(Money buyTotal) {
+        this.buyTotal = buyTotal;
+    }
+
+    void setSellTotal(Money sellTotal) {
+        this.sellTotal = sellTotal;
+    }
 }
