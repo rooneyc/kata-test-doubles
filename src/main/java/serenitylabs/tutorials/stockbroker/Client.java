@@ -11,7 +11,7 @@ public class Client {
 
     private static final String BUY = "Buy: ";
     private static final String SELL = "Sell: ";
-    private static final String SEPERATOR = ", ";
+    private static final String SEPARATOR = ", ";
 
     public Client(StockBroker broker, OrderParser parser) {
         this.broker = broker;
@@ -23,7 +23,7 @@ public class Client {
         List<Order> orderList = parser.parse(orders);
         OrderSummaryInterface orderSummary = broker.place(orderList);
 
-        return BUY + orderSummary.buyTotal() + SEPERATOR + SELL + orderSummary.sellTotal();
+        return BUY + orderSummary.buyTotal() + SEPARATOR + SELL + orderSummary.sellTotal();
 
     }
 }

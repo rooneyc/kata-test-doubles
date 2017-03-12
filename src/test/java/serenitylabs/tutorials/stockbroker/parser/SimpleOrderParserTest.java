@@ -2,7 +2,6 @@ package serenitylabs.tutorials.stockbroker.parser;
 
 import org.joda.money.Money;
 import org.junit.Test;
-import serenitylabs.tutorials.stockbroker.Client;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 
@@ -31,13 +30,12 @@ public class SimpleOrderParserTest {
         //Given
         String orderString = "GOOG 300 829.08 B";
         SimpleOrderParser orderParser = new SimpleOrderParser();
-        Order parsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
 
         //When
         List<Order> orders = orderParser.parse(orderString);
 
         //Then
-        assertThat(orders).contains(parsedOrder);
+        assertThat(orders).contains(new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy));
     }
 
     @Test
@@ -46,16 +44,14 @@ public class SimpleOrderParserTest {
         //Given
         String orderString = "GOOG 300 829.08 B,FB 320 137.17 S";
         SimpleOrderParser orderParser = new SimpleOrderParser();
-        Order firstParsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
-        Order secondParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
 
         //When
         List<Order> orders = orderParser.parse(orderString);
 
         //Then
-        assertThat(orders).contains(firstParsedOrder);
+        assertThat(orders).contains(new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy));
         //And
-        assertThat(orders).contains(secondParsedOrder);
+        assertThat(orders).contains(new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell));
     }
 
     @Test
@@ -64,19 +60,16 @@ public class SimpleOrderParserTest {
         //Given
         String orderString = "ZNGA 1300 2.78 B,AAPL 50 139.78 B,FB 320 137.17 S";
         SimpleOrderParser orderParser = new SimpleOrderParser();
-        Order firstParsedOrder = new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy);
-        Order secondParsedOrder = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
-        Order thirdParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
 
         //When
         List<Order> orders = orderParser.parse(orderString);
 
         //Then
-        assertThat(orders).contains(firstParsedOrder);
+        assertThat(orders).contains(new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy));
         //And
-        assertThat(orders).contains(secondParsedOrder);
+        assertThat(orders).contains(new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy));
         //And
-        assertThat(orders).contains(thirdParsedOrder);
+        assertThat(orders).contains(new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell));
     }
 
 }

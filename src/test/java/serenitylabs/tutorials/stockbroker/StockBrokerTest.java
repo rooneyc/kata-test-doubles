@@ -20,6 +20,7 @@ public class StockBrokerTest {
         //Given
         StockExchange exchange = mock(StockExchange.class);
         StockBroker broker = new StockBroker(exchange);
+        //And
         List<Order> orders = new ArrayList<>();
 
         //When
@@ -35,7 +36,7 @@ public class StockBrokerTest {
         //Given
         StockExchange exchange = mock(StockExchange.class);
         StockBroker broker = new StockBroker(exchange);
-
+        //And
         Order order = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
         List<Order> orders = new ArrayList<>();
         orders.add(order);
@@ -53,7 +54,7 @@ public class StockBrokerTest {
         //Given
         StockExchange exchange = mock(StockExchange.class);
         StockBroker broker = new StockBroker(exchange);
-
+        //And
         Order order = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         List<Order> orders = new ArrayList<>();
         orders.add(order);
@@ -71,7 +72,7 @@ public class StockBrokerTest {
         //Given
         StockExchange exchange = mock(StockExchange.class);
         StockBroker broker = new StockBroker(exchange);
-
+        //And
         Order firstOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
         Order secondOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         List<Order> orders = new ArrayList<>();
@@ -93,7 +94,7 @@ public class StockBrokerTest {
         //Given
         StockExchange exchange = mock(StockExchange.class);
         StockBroker broker = new StockBroker(exchange);
-
+        //And
         Order firstOrder = new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy);
         Order secondOrder = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
         Order thirdOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);

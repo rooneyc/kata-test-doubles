@@ -113,6 +113,11 @@ public class ClientTest {
         assertThat(orderSummary).isEqualTo("Buy: USD 10603.00, Sell: USD 43894.40");
     }
 
+    @Test
+    public void should_mention_a_failed_order() throws Exception {
+
+    }
+
     private OrderParser createMockedParser(String orderString, Order... orders){
 
         List<Order> orderList = new ArrayList<>();
