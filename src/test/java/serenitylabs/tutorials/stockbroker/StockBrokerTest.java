@@ -23,7 +23,7 @@ public class StockBrokerTest {
         List<Order> orders = new ArrayList<>();
 
         //When
-        OrderSummary orderSummary = broker.place(orders);
+        OrderSummaryInterface orderSummary = broker.place(orders);
 
         //Then
         assertThat(orderSummary.buyTotal()).isEqualTo(Money.parse("USD 0.00"));
@@ -41,7 +41,7 @@ public class StockBrokerTest {
         orders.add(order);
 
         //When
-        OrderSummary orderSummary = broker.place(orders);
+        OrderSummaryInterface orderSummary = broker.place(orders);
 
         //Then
         assertThat(orderSummary.buyTotal()).isEqualTo(Money.parse("USD 248724.00"));
@@ -59,7 +59,7 @@ public class StockBrokerTest {
         orders.add(order);
 
         //When
-        OrderSummary orderSummary = broker.place(orders);
+        OrderSummaryInterface orderSummary = broker.place(orders);
 
         //Then
         assertThat(orderSummary.sellTotal()).isEqualTo(Money.parse("USD 43894.40"));
@@ -79,7 +79,7 @@ public class StockBrokerTest {
         orders.add(secondOrder);
 
         //When
-        OrderSummary orderSummary = broker.place(orders);
+        OrderSummaryInterface orderSummary = broker.place(orders);
 
         //Then
         assertThat(orderSummary.sellTotal()).isEqualTo(Money.parse("USD 43894.40"));
@@ -103,7 +103,7 @@ public class StockBrokerTest {
         orders.add(thirdOrder);
 
         //When
-        OrderSummary orderSummary = broker.place(orders);
+        OrderSummaryInterface orderSummary = broker.place(orders);
 
         //Then
         assertThat(orderSummary.sellTotal()).isEqualTo(Money.parse("USD 43894.40"));

@@ -13,7 +13,7 @@ public class StockBroker {
         this.exchange = exchange;
     }
 
-    OrderSummary place(List<Order> orders) {
+    OrderSummaryInterface place(List<Order> orders) {
 
         OrderSummary orderSummary = new OrderSummary();
 

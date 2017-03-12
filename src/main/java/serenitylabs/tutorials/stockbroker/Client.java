@@ -21,7 +21,7 @@ public class Client {
     String place(String orders) {
 
         List<Order> orderList = parser.parse(orders);
-        OrderSummary orderSummary = broker.place(orderList);
+        OrderSummaryInterface orderSummary = broker.place(orderList);
 
         return BUY + orderSummary.buyTotal() + SEPERATOR + SELL + orderSummary.sellTotal();
 

@@ -21,10 +21,13 @@ public class ClientTest {
 
         //Given
         String orderString = "";
+        OrderParser orderParser = createMockedParser(orderString);
+
         List<Order> orderList = new ArrayList<>();
-        OrderParser orderParser = mock(OrderParser.class);
-        given(orderParser.parse(orderString)).willReturn(orderList);
-        StockBroker broker = new StockBroker(null);
+        OrderSummary stubbedOrderSummary = new OrderSummary();
+        StockBroker broker = mock(StockBroker.class);
+        given(broker.place(orderList)).willReturn(stubbedOrderSummary);
+
         Client client = new Client(broker, orderParser);
 
         //When
@@ -41,7 +44,16 @@ public class ClientTest {
         String orderString = "GOOG 300 829.08 B";
         Order parsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
         OrderParser orderParser = createMockedParser(orderString, parsedOrder);
-        StockBroker broker = new StockBroker(null);
+
+        List<Order> orderList = new ArrayList<>();
+        orderList.add(parsedOrder);
+        OrderSummary stubbedOrderSummary = new OrderSummary();
+        stubbedOrderSummary.setBuyTotal(Money.parse("USD 248724.00"));
+        stubbedOrderSummary.setSellTotal(Money.parse("USD 0.00"));
+
+        StockBroker broker = mock(StockBroker.class);
+        given(broker.place(orderList)).willReturn(stubbedOrderSummary);
+
         Client client = new Client(broker, orderParser);
 
         //When
@@ -58,7 +70,16 @@ public class ClientTest {
         String orderString = "FB 320 137.17 S";
         Order parsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         OrderParser orderParser = createMockedParser(orderString, parsedOrder);
-        StockBroker broker = new StockBroker(null);
+
+        List<Order> orderList = new ArrayList<>();
+        orderList.add(parsedOrder);
+        OrderSummary stubbedOrderSummary = new OrderSummary();
+        stubbedOrderSummary.setBuyTotal(Money.parse("USD 0.00"));
+        stubbedOrderSummary.setSellTotal(Money.parse("USD 43894.40"));
+
+        StockBroker broker = mock(StockBroker.class);
+        given(broker.place(orderList)).willReturn(stubbedOrderSummary);
+
         Client client = new Client(broker, orderParser);
 
         //When
@@ -76,7 +97,18 @@ public class ClientTest {
         Order firstParsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
         Order secondParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         OrderParser orderParser = createMockedParser(orderString, firstParsedOrder, secondParsedOrder);
-        StockBroker broker = new StockBroker(null);
+
+
+        List<Order> orderList = new ArrayList<>();
+        orderList.add(firstParsedOrder);
+        orderList.add(secondParsedOrder);
+        OrderSummary stubbedOrderSummary = new OrderSummary();
+        stubbedOrderSummary.setBuyTotal(Money.parse("USD 248724.00"));
+        stubbedOrderSummary.setSellTotal(Money.parse("USD 43894.40"));
+
+        StockBroker broker = mock(StockBroker.class);
+        given(broker.place(orderList)).willReturn(stubbedOrderSummary);
+
         Client client = new Client(broker, orderParser);
 
         //When
@@ -95,7 +127,20 @@ public class ClientTest {
         Order secondParsedOrder = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
         Order thirdParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         OrderParser orderParser = createMockedParser(orderString, firstParsedOrder, secondParsedOrder, thirdParsedOrder);
-        StockBroker broker = new StockBroker(null);
+
+
+
+        List<Order> orderList = new ArrayList<>();
+        orderList.add(firstParsedOrder);
+        orderList.add(secondParsedOrder);
+        orderList.add(thirdParsedOrder);
+        OrderSummary stubbedOrderSummary = new OrderSummary();
+        stubbedOrderSummary.setBuyTotal(Money.parse("USD 10603.00"));
+        stubbedOrderSummary.setSellTotal(Money.parse("USD 43894.40"));
+
+        StockBroker broker = mock(StockBroker.class);
+        given(broker.place(orderList)).willReturn(stubbedOrderSummary);
+
         Client client = new Client(broker, orderParser);
 
         //When
