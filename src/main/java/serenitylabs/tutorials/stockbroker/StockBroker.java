@@ -29,7 +29,7 @@ public class StockBroker {
                     orderSummary.setSellTotal(orderSummary.sellTotal().plus(order.price().multipliedBy(order.quantity())));
                 }
             } else {
-                orderSummary.failedOrders().add(order);
+                orderSummary.addFailedOrder(order);
             }
         }
 
