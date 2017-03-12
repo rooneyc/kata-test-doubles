@@ -35,7 +35,7 @@ public class Client {
             StringBuilder failedOrderSymbols = new StringBuilder(itr.next().symbol());
 
             while (itr.hasNext()){
-                failedOrderSymbols.append(SEPARATOR + itr.next().symbol());
+                failedOrderSymbols.append(SEPARATOR).append(itr.next().symbol());
             }
 
             return outputString + SEPARATOR + FAILED + failedOrderSymbols;
