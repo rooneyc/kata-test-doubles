@@ -34,4 +34,8 @@ public class OrderSummary implements OrderSummaryInterface {
     void setSellTotal(Money sellTotal) {
         this.sellTotal = sellTotal;
     }
+
+    void addFailedOrder(Order order){
+        failedOrders.add(order);
+    }
 }
