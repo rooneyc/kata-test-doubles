@@ -28,6 +28,8 @@ public class StockBroker {
                 if (order.type().equals(OrderType.Sell)) {
                     orderSummary.setSellTotal(orderSummary.sellTotal().plus(order.price().multipliedBy(order.quantity())));
                 }
+            } else {
+                orderSummary.failedOrders().add(order);
             }
         }
 
