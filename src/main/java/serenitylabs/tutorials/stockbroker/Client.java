@@ -11,6 +11,7 @@ public class Client {
 
     private static final String BUY = "Buy: ";
     private static final String SELL = "Sell: ";
+    private static final String FAILED = "Failed: ";
     private static final String SEPARATOR = ", ";
 
     public Client(StockBroker broker, OrderParser parser) {
@@ -23,7 +24,11 @@ public class Client {
         List<Order> orderList = parser.parse(orders);
         OrderSummaryInterface orderSummary = broker.place(orderList);
 
-        return BUY + orderSummary.buyTotal() + SEPARATOR + SELL + orderSummary.sellTotal();
+        if (orderSummary.failedOrders().isEmpty()) {
+            return BUY + orderSummary.buyTotal() + SEPARATOR + SELL + orderSummary.sellTotal();
+        } else {
+            return BUY + orderSummary.buyTotal() + SEPARATOR + SELL + orderSummary.sellTotal() + SEPARATOR + FAILED + orderSummary.failedOrders().get(0).symbol();
+        }
 
     }
 }
