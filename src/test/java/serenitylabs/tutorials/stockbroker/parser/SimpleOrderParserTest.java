@@ -2,6 +2,7 @@ package serenitylabs.tutorials.stockbroker.parser;
 
 import org.joda.money.Money;
 import org.junit.Test;
+import serenitylabs.tutorials.stockbroker.Client;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 
@@ -41,18 +42,20 @@ public class SimpleOrderParserTest {
     }
 
     @Test
-    public void should_be_able_to_parse_a_single_sell_order() throws Exception {
+    public void should_be_able_to_place_a_double_order() throws Exception {
 
         //Given
-        String orderString = "FB 320 137.17 S";
+        String orderString = "GOOG 300 829.08 B,FB 320 137.17 S";
         SimpleOrderParser orderParser = new SimpleOrderParser();
-        Order parsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
+        Order firstParsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
+        Order secondParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
 
         //When
         List<Order> orders = orderParser.parse(orderString);
 
         //Then
-        assertThat(orders).contains(parsedOrder);
+        assertThat(orders).contains(firstParsedOrder);
+        //And
+        assertThat(orders).contains(secondParsedOrder);
     }
-
 }
