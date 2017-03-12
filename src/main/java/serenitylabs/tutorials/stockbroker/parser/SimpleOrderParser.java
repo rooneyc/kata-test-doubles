@@ -19,16 +19,21 @@ public class SimpleOrderParser implements OrderParser {
             return orderList;
         }
 
-        List<String> orderParts = Arrays.asList(orders.split("\\s"));
+        List<String> orderStrings = Arrays.asList(orders.split(","));
 
-        final String stockSymbol = orderParts.get(0);
-        final int quantity =  Integer.parseInt(orderParts.get(1));
-        final Money price = Money.parse("USD " + orderParts.get(2));
-        final OrderType orderType = OrderType.bySymbol(orderParts.get(3));
+        for (String orderString : orderStrings) {
 
-        Order order = new Order(stockSymbol, quantity, price, orderType);
+            List<String> orderParts = Arrays.asList(orderString.split("\\s"));
 
-        orderList.add(order);
+            final String stockSymbol = orderParts.get(0);
+            final int quantity = Integer.parseInt(orderParts.get(1));
+            final Money price = Money.parse("USD " + orderParts.get(2));
+            final OrderType orderType = OrderType.bySymbol(orderParts.get(3));
+
+            Order order = new Order(stockSymbol, quantity, price, orderType);
+
+            orderList.add(order);
+        }
 
         return orderList;
     }
