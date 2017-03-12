@@ -1,10 +1,12 @@
 package serenitylabs.tutorials.stockbroker;
 
+import org.joda.money.Money;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
+import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.exchange.StockExchange;
 import serenitylabs.tutorials.stockbroker.parser.SimpleOrderParser;
 
@@ -121,6 +123,34 @@ public class ClientTest {
 
         //Then
         assertThat(orderSummary).isEqualTo("Buy: USD 0.00, Sell: USD 0.00, Failed: GOOG");
+    }
+
+    @Test
+    public void should_mention_if_two_orders_not_executed() throws Exception {
+
+        //Given
+        String orderString = "ZNGA 1300 2.78 B,AAPL 50 139.78 B,FB 320 137.17 S,ORCL 1000 42.69 S";
+        //And
+        Order successfulOrder1 = new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy);
+        given(exchange.execute(successfulOrder1)).willReturn(true);
+        //And
+        Order successfulOrder2 = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
+        given(exchange.execute(successfulOrder2)).willReturn(true);
+        //And
+        Order failedOrder1 = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
+        given(exchange.execute(failedOrder1)).willReturn(false);
+        //And
+        Order failedOrder2 = new Order("ORCL", 1000, Money.parse("USD 42.69"), OrderType.Sell);
+        given(exchange.execute(failedOrder2)).willReturn(false);
+        //And
+        StockBroker broker = new StockBroker(exchange);
+        Client client = new Client(broker, new SimpleOrderParser());
+
+        //When
+        String orderSummary = client.place(orderString);
+
+        //Then
+        assertThat(orderSummary).isEqualTo("Buy: USD 10603.00, Sell: USD 00.40, Failed: FB, ORCL");
     }
 
 }
