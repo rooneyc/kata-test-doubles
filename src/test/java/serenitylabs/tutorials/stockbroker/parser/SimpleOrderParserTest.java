@@ -58,4 +58,27 @@ public class SimpleOrderParserTest {
         //And
         assertThat(orders).contains(secondParsedOrder);
     }
+
+    @Test
+    public void should_be_able_to_place_a_multi_order() throws Exception {
+
+        //Given
+        String orderString = "ZNGA 1300 2.78 B,AAPL 50 139.78 B,FB 320 137.17 S";
+        SimpleOrderParser orderParser = new SimpleOrderParser();
+        Order firstParsedOrder = new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy);
+        Order secondParsedOrder = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
+        Order thirdParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
+
+        //When
+        List<Order> orders = orderParser.parse(orderString);
+
+        //Then
+        assertThat(orders).contains(firstParsedOrder);
+        //And
+        assertThat(orders).contains(secondParsedOrder);
+        //And
+        assertThat(orders).contains(thirdParsedOrder);
+    }
+
+
 }
