@@ -1,7 +1,7 @@
 package serenitylabs.tutorials.stockbroker;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import serenitylabs.tutorials.stockbroker.parser.SimpleOrderParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +24,8 @@ public class ClientTest {
     public void should_be_able_to_place_a_single_buy_order() throws Exception {
 
         //Given
-        Client client = new Client(null, null);
+        SimpleOrderParser orderParser = new SimpleOrderParser();
+        Client client = new Client(null, orderParser);
 
         //When
         String orderSummary = client.place("GOOG 300 829.08 B");
@@ -37,7 +38,8 @@ public class ClientTest {
     public void should_be_able_to_place_a_single_sell_order() throws Exception {
 
         //Given
-        Client client = new Client(null, null);
+        SimpleOrderParser orderParser = new SimpleOrderParser();
+        Client client = new Client(null, orderParser);
 
         //When
         String orderSummary = client.place("FB 320 137.17 S");
@@ -50,7 +52,8 @@ public class ClientTest {
     public void should_be_able_to_place_a_double_order() throws Exception {
 
         //Given
-        Client client = new Client(null, null);
+        SimpleOrderParser orderParser = new SimpleOrderParser();
+        Client client = new Client(null, orderParser);
 
         //When
         String orderSummary = client.place("GOOG 300 829.08 B,FB 320 137.17 S");

@@ -25,7 +25,6 @@ public class SimpleOrderParserTest {
         assertThat(orders).isEmpty();
     }
 
-
     @Test
     public void should_be_able_to_parse_a_single_buy_order() throws Exception {
 
@@ -79,6 +78,5 @@ public class SimpleOrderParserTest {
         //And
         assertThat(orders).contains(thirdParsedOrder);
     }
-
 
 }

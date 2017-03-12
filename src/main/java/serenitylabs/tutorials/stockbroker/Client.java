@@ -1,8 +1,10 @@
 package serenitylabs.tutorials.stockbroker;
 
+import org.joda.money.Money;
+import serenitylabs.tutorials.stockbroker.exchange.Order;
+import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.parser.OrderParser;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Client {
@@ -20,34 +22,24 @@ public class Client {
             return "Buy: USD 0.00, Sell: USD 0.00";
         }
 
-        double bought = 0.00;
-        double sold = 0.00;
+        List<Order> orderList = parser.parse(orders);
 
-        List<String> orderStrings = Arrays.asList(orders.split(","));
+        Money bought = Money.parse("USD 0.00");
+        Money sold = Money.parse("USD 0.00");
 
-        for (String orderString : orderStrings) {
+        for (Order order : orderList) {
 
-            List<String> orderParts = Arrays.asList(orderString.split("\\s"));
-
-            if ("B".equals(orderParts.get(3))) {
-                 bought = bought
-                         +
-                         (Integer.parseInt(orderParts.get(1))
-                         *
-                         Double.parseDouble(orderParts.get(2)));
+            if (order.type().equals(OrderType.Buy)) {
+                bought = bought.plus(order.price().multipliedBy(order.quantity()));
             }
 
-            if ("S".equals(orderParts.get(3))) {
-                  sold = sold
-                         +
-                         (Integer.parseInt(orderParts.get(1))
-                         * Double.parseDouble(orderParts.get(2)));
-            }
+            if (order.type().equals(OrderType.Sell)) {
+                sold = sold.plus(order.price().multipliedBy(order.quantity()));
 
+            }
         }
 
-        return "Buy: USD " + String.format("%.2f", bought) +
-                ", Sell: USD " + String.format("%.2f", sold);
+        return "Buy: " + bought + ", Sell: " + sold;
 
     }
 }
