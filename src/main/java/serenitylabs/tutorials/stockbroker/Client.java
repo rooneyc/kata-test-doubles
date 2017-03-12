@@ -11,6 +11,10 @@ public class Client {
     private final StockBroker broker;
     private final OrderParser parser;
 
+    private static final String BUY = "Buy: ";
+    private static final String SELL = "Sell: ";
+    private static final String SEPERATOR = ", ";
+
     public Client(StockBroker broker, OrderParser parser) {
         this.broker = broker;
         this.parser = parser;
@@ -18,14 +22,14 @@ public class Client {
 
     String place(String orders) {
 
+        Money bought = Money.parse("USD 0.00");
+        Money sold = Money.parse("USD 0.00");
+
         if (orders.isEmpty()) {
-            return "Buy: USD 0.00, Sell: USD 0.00";
+            return BUY + bought + SEPERATOR + SELL + sold;
         }
 
         List<Order> orderList = parser.parse(orders);
-
-        Money bought = Money.parse("USD 0.00");
-        Money sold = Money.parse("USD 0.00");
 
         for (Order order : orderList) {
 
@@ -39,7 +43,7 @@ public class Client {
             }
         }
 
-        return "Buy: " + bought + ", Sell: " + sold;
+        return BUY + bought + SEPERATOR + SELL + sold;
 
     }
 }

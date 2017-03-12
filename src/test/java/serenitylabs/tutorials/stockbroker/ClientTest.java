@@ -5,7 +5,6 @@ import org.junit.Test;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.parser.OrderParser;
-import serenitylabs.tutorials.stockbroker.parser.SimpleOrderParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
