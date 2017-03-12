@@ -13,6 +13,12 @@ public class SimpleOrderParser implements OrderParser {
     @Override
     public List<Order> parse(String orders) {
 
+        List<Order> orderList = new ArrayList<>();
+
+        if (orders.isEmpty()) {
+            return orderList;
+        }
+
         List<String> orderParts = Arrays.asList(orders.split("\\s"));
 
         final String stockSymbol = orderParts.get(0);
@@ -22,7 +28,6 @@ public class SimpleOrderParser implements OrderParser {
 
         Order order = new Order(stockSymbol, quantity, price, orderType);
 
-        List<Order> orderList = new ArrayList<>();
         orderList.add(order);
 
         return orderList;
