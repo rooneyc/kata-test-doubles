@@ -87,4 +87,29 @@ public class StockBrokerTest {
         assertThat(orderSummary.buyTotal()).isEqualTo(Money.parse("USD 248724.00"));
     }
 
+    @Test
+    public void should_be_able_to_place_a_multi_order() throws Exception {
+
+        //Given
+        StockExchange exchange = mock(StockExchange.class);
+        StockBroker broker = new StockBroker(exchange);
+
+        Order firstOrder = new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy);
+        Order secondOrder = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
+        Order thirdOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
+        List<Order> orders = new ArrayList<>();
+        orders.add(firstOrder);
+        orders.add(secondOrder);
+        orders.add(thirdOrder);
+
+        //When
+        OrderSummary orderSummary = broker.place(orders);
+
+        //Then
+        assertThat(orderSummary.sellTotal()).isEqualTo(Money.parse("USD 43894.40"));
+        //And
+        assertThat(orderSummary.buyTotal()).isEqualTo(Money.parse("USD 10603.00"));
+
+    }
+
 }
