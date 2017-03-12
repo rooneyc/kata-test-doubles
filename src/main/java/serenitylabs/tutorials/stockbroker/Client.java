@@ -3,6 +3,7 @@ package serenitylabs.tutorials.stockbroker;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.parser.OrderParser;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class Client {
@@ -29,7 +30,15 @@ public class Client {
         if (orderSummary.failedOrders().isEmpty()) {
             return outputString;
         } else {
-            return outputString + SEPARATOR + FAILED + orderSummary.failedOrders().get(0).symbol();
+
+            Iterator<Order> itr = orderSummary.failedOrders().iterator();
+            StringBuilder failedOrderSymbols = new StringBuilder(itr.next().symbol());
+
+            while (itr.hasNext()){
+                failedOrderSymbols.append(SEPARATOR + itr.next().symbol());
+            }
+
+            return outputString + SEPARATOR + FAILED + failedOrderSymbols;
         }
 
     }

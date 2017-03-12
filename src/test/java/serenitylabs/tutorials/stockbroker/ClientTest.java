@@ -150,7 +150,7 @@ public class ClientTest {
         String orderSummary = client.place(orderString);
 
         //Then
-        assertThat(orderSummary).isEqualTo("Buy: USD 10603.00, Sell: USD 00.40, Failed: FB, ORCL");
+        assertThat(orderSummary).isEqualTo("Buy: USD 10603.00, Sell: USD 0.00, Failed: FB, ORCL");
     }
 
 }
