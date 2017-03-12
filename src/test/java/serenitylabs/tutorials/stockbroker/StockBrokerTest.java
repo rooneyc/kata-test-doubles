@@ -112,4 +112,20 @@ public class StockBrokerTest {
 
     }
 
+    @Test
+    public void should_mention_if_an_order_not_executed() throws Exception {
+
+        //Given
+        StockExchange exchange = mock(StockExchange.class);
+        StockBroker broker = new StockBroker(exchange);
+        //And
+        Order order = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
+
+        //When
+        OrderSummaryInterface orderSummary = broker.place(Collections.singletonList(order));
+
+        //Then
+        assertThat(orderSummary.failedOrders()).contains(order);
+    }
+
 }
