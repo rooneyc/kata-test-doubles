@@ -1,25 +1,16 @@
 package serenitylabs.tutorials.stockbroker;
 
-import org.joda.money.Money;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
-import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.exchange.StockExchange;
-import serenitylabs.tutorials.stockbroker.parser.OrderParser;
 import serenitylabs.tutorials.stockbroker.parser.SimpleOrderParser;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 public class ClientTest {
 

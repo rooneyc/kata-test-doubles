@@ -39,4 +39,5 @@ public class OrderSummary implements OrderSummaryInterface {
     void addFailedOrder(Order order){
         failedOrders.add(order);
     }
+
 }

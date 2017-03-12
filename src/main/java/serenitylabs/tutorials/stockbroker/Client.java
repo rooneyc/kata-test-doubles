@@ -24,10 +24,12 @@ public class Client {
         List<Order> orderList = parser.parse(orders);
         OrderSummaryInterface orderSummary = broker.place(orderList);
 
+        String outputString = BUY + orderSummary.buyTotal() + SEPARATOR + SELL + orderSummary.sellTotal();
+
         if (orderSummary.failedOrders().isEmpty()) {
-            return BUY + orderSummary.buyTotal() + SEPARATOR + SELL + orderSummary.sellTotal();
+            return outputString;
         } else {
-            return BUY + orderSummary.buyTotal() + SEPARATOR + SELL + orderSummary.sellTotal() + SEPARATOR + FAILED + orderSummary.failedOrders().get(0).symbol();
+            return outputString + SEPARATOR + FAILED + orderSummary.failedOrders().get(0).symbol();
         }
 
     }
