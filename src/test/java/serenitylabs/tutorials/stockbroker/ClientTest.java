@@ -5,7 +5,6 @@ import org.junit.Test;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.parser.OrderParser;
-import serenitylabs.tutorials.stockbroker.parser.SimpleOrderParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +21,11 @@ public class ClientTest {
 
         //Given
         String orderString = "";
-        Client client = new Client(null, null);
+        List<Order> orderList = new ArrayList<>();
+        OrderParser orderParser = mock(OrderParser.class);
+        given(orderParser.parse(orderString)).willReturn(orderList);
+        StockBroker broker = new StockBroker(null);
+        Client client = new Client(broker, orderParser);
 
         //When
         String orderSummary = client.place(orderString);
@@ -38,7 +41,8 @@ public class ClientTest {
         String orderString = "GOOG 300 829.08 B";
         Order parsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
         OrderParser orderParser = createMockedParser(orderString, parsedOrder);
-        Client client = new Client(null, orderParser);
+        StockBroker broker = new StockBroker(null);
+        Client client = new Client(broker, orderParser);
 
         //When
         String orderSummary = client.place(orderString);
@@ -54,7 +58,8 @@ public class ClientTest {
         String orderString = "FB 320 137.17 S";
         Order parsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         OrderParser orderParser = createMockedParser(orderString, parsedOrder);
-        Client client = new Client(null, orderParser);
+        StockBroker broker = new StockBroker(null);
+        Client client = new Client(broker, orderParser);
 
         //When
         String orderSummary = client.place(orderString);
@@ -71,7 +76,8 @@ public class ClientTest {
         Order firstParsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
         Order secondParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         OrderParser orderParser = createMockedParser(orderString, firstParsedOrder, secondParsedOrder);
-        Client client = new Client(null, orderParser);
+        StockBroker broker = new StockBroker(null);
+        Client client = new Client(broker, orderParser);
 
         //When
         String orderSummary = client.place(orderString);
@@ -89,7 +95,8 @@ public class ClientTest {
         Order secondParsedOrder = new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy);
         Order thirdParsedOrder = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
         OrderParser orderParser = createMockedParser(orderString, firstParsedOrder, secondParsedOrder, thirdParsedOrder);
-        Client client = new Client(null, orderParser);
+        StockBroker broker = new StockBroker(null);
+        Client client = new Client(broker, orderParser);
 
         //When
         String orderSummary = client.place(orderString);
