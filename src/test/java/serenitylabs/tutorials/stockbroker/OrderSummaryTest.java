@@ -6,6 +6,7 @@ import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
 public class OrderSummaryTest {
 
@@ -16,11 +17,16 @@ public class OrderSummaryTest {
         Order order = new Order("ORCL", 1000, Money.parse("USD 42.69"), OrderType.Sell);
         OrderSummary summary = new OrderSummary();
 
-        //When
-        summary.failedOrders().add(order);
+        try {
+            //When
+            summary.failedOrders().add(order);
+            //Then
+            failBecauseExceptionWasNotThrown(UnsupportedOperationException.class);
+        } catch (UnsupportedOperationException e) {
+            assertThat(e).isInstanceOf(UnsupportedOperationException.class);
+        }
 
-        //Then
-        assertThat(summary.failedOrders()).doesNotContain(order);
+
 
     }
 

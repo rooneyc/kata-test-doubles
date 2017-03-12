@@ -4,6 +4,7 @@ import org.joda.money.Money;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OrderSummary implements OrderSummaryInterface {
@@ -24,7 +25,7 @@ public class OrderSummary implements OrderSummaryInterface {
 
     @Override
     public List<Order> failedOrders() {
-        return failedOrders;
+        return Collections.unmodifiableList(failedOrders);
     }
 
     void setBuyTotal(Money buyTotal) {
