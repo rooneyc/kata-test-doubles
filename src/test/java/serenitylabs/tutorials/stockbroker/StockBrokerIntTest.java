@@ -21,4 +21,17 @@ public class StockBrokerIntTest {
 
     }
 
+    @Test
+    public void should_be_able_to_place_a_single_order() throws Exception {
+
+        //Given
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(null, null));
+
+        //When
+        String output = terminal.execute("GOOG 300 829.08 B");
+
+        //Then
+        assertThat(output).isEqualTo("Buy: USD 248724.00, Sell: USD 0.00");
+    }
+
 }
