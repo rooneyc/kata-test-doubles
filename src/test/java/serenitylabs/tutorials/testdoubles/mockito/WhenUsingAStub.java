@@ -29,8 +29,18 @@ public class WhenUsingAStub {
     }
 
     @Test
-    @Ignore("Implement me, please ...")
     public void we_want_to_control_the_returned_value_to_make_the_system_under_test_reject_the_login_attempt() {
+
+        //Given
+        Authoriser authoriser = mock(Authoriser.class);
+        given(authoriser.authorise(anyString(), anyString())).willReturn(Boolean.FALSE);
+        System system = new System(authoriser);
+
+        //When
+        system.login("bob", "SecretPassword");
+
+        //Then
+        assertThat(system.numberOfActiveUsers()).isEqualTo(0);
 
     }
 }
