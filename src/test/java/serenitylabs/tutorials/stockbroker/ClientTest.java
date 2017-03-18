@@ -10,8 +10,10 @@ public class ClientTest {
     @Test
     public void should_be_able_to_place_an_empty_order() throws Exception {
 
+        //When
         Client client = new Client(null, null);
 
+        //Then
         assertThat(client.place("")).isEqualTo("Buy: USD 0.00, Sell: USD 0.00");
     }
 
