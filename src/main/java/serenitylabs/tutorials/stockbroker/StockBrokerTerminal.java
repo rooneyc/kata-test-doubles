@@ -7,19 +7,21 @@ import java.io.Console;
 
 public class StockBrokerTerminal {
 
-    StockBrokerTerminal(Client client) {
+    private Client client;
 
+    StockBrokerTerminal(Client client) {
+        this.client = client;
     }
 
     public static void main(String[] args) {
         Console console =  System.console();
-        String input = console.readLine("/ ");
+        String orders = console.readLine("/ ");
         StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
-        String output = terminal.execute(input);
+        String output = terminal.execute(orders);
         console.format(output);
     }
 
-    String execute(String input) {
-        return "Buy: USD 0.00, Sell: USD 0.00";
+    String execute(String orders) {
+        return client.place(orders);
     }
 }
