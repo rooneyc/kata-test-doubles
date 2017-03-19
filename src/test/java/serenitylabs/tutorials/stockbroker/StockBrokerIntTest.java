@@ -24,7 +24,7 @@ public class StockBrokerIntTest {
     }
 
     @Test
-    public void should_be_able_to_place_a_single_order_scenario1() throws Exception {
+    public void should_be_able_to_place_a_single_buy_order_scenario1() throws Exception {
 
         //Given
         StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
@@ -37,7 +37,7 @@ public class StockBrokerIntTest {
     }
 
     @Test
-    public void should_be_able_to_place_a_single_order_scenario2() throws Exception {
+    public void should_be_able_to_place_a_single_buy_order_scenario2() throws Exception {
 
         //Given
         StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
@@ -47,6 +47,19 @@ public class StockBrokerIntTest {
 
         //Then
         assertThat(output).isEqualTo("Buy: USD 3614.00, Sell: USD 0.00");
+    }
+
+    @Test
+    public void should_be_able_to_place_a_single_sell_order_scenario1() throws Exception {
+
+        //Given
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
+
+        //When
+        String output = terminal.execute("FB 320 137.17 S");
+
+        //Then
+        assertThat(output).isEqualTo("Buy: USD 0.00, Sell: USD 43894.4");
     }
 
 }
