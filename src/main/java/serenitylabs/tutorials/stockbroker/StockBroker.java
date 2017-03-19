@@ -30,7 +30,8 @@ public class StockBroker {
             Money subtotal = price.multipliedBy(quantity);
 
             if (Buy.equals(order.type())) {
-                return new ConcreteOrderSummary().withBuyTotal(subtotal);
+                Money buyTotal = summary.buyTotal().plus(subtotal);
+                summary = summary.withBuyTotal(buyTotal);
             }
 
             if (Sell.equals(order.type())) {
