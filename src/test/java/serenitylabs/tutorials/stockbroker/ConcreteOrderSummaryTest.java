@@ -43,4 +43,18 @@ public class ConcreteOrderSummaryTest {
 
     }
 
+    @Test
+    public void should_be_able_to_set_sellTotal() throws Exception {
+
+        //Given
+        ConcreteOrderSummary summary = new ConcreteOrderSummary();
+
+        //When
+        summary = summary.withSellTotal(Money.parse("USD 43894.4"));
+
+        //Then
+        assertThat(summary.sellTotal()).isEqualTo(Money.parse("USD 43894.4"));
+
+    }
+
 }
