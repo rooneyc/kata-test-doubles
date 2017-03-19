@@ -59,7 +59,20 @@ public class StockBrokerIntTest {
         String output = terminal.execute("FB 320 137.17 S");
 
         //Then
-        assertThat(output).isEqualTo("Buy: USD 0.00, Sell: USD 43894.4");
+        assertThat(output).isEqualTo("Buy: USD 0.00, Sell: USD 43894.40");
+    }
+
+    @Test
+    public void should_be_able_to_place_a_double_sell_order() throws Exception {
+
+        //Given
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
+
+        //When
+        String output = terminal.execute("B 320 137.17 S,ORCL 1000 42.69 S");
+
+        //Then
+        assertThat(output).isEqualTo("Buy: USD 0.00, Sell: USD 86584.40");
     }
 
 }
