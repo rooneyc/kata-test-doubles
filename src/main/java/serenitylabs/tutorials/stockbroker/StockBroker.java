@@ -21,19 +21,25 @@ public class StockBroker {
             return new ConcreteOrderSummary();
         }
 
-        int quantity = orders.get(0).quantity();
-        Money orderPrice = orders.get(0).price();
-        Money totalPrice = orderPrice.multipliedBy(quantity);
+        ConcreteOrderSummary summary = new ConcreteOrderSummary();
 
-        if (Buy.equals(orders.get(0).type())) {
-            return new ConcreteOrderSummary().withBuyTotal(totalPrice);
+        for (Order order : orders) {
+
+            int quantity = order.quantity();
+            Money price = order.price();
+            Money subtotal = price.multipliedBy(quantity);
+
+            if (Buy.equals(order.type())) {
+                return new ConcreteOrderSummary().withBuyTotal(subtotal);
+            }
+
+            if (Sell.equals(order.type())) {
+                Money sellTotal = summary.sellTotal().plus(subtotal);
+                summary = summary.withSellTotal(sellTotal);
+            }
         }
 
-        if (Sell.equals(orders.get(0).type())) {
-            return new ConcreteOrderSummary().withSellTotal(totalPrice);
-        }
-
-        return null;
+        return summary;
 
     }
 
