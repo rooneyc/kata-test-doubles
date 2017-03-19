@@ -21,7 +21,7 @@ public class StockBrokerIntTest {
     }
 
     @Test
-    public void should_be_able_to_place_a_single_order() throws Exception {
+    public void should_be_able_to_place_a_single_order_scenario1() throws Exception {
 
         //Given
         StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(null, null));
@@ -31,6 +31,19 @@ public class StockBrokerIntTest {
 
         //Then
         assertThat(output).isEqualTo("Buy: USD 248724.00, Sell: USD 0.00");
+    }
+
+    @Test
+    public void should_be_able_to_place_a_single_order_scenario2() throws Exception {
+
+        //Given
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(null, null));
+
+        //When
+        String output = terminal.execute("ZNGA 1300 2.78 Bca");
+
+        //Then
+        assertThat(output).isEqualTo("Buy: USD 3614.00, Sell: USD 0.00");
     }
 
 }
