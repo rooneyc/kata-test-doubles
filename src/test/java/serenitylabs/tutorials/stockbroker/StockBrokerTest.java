@@ -24,4 +24,17 @@ public class StockBrokerTest {
         assertThat(orderSummary.buyTotal()).isEqualTo(Money.parse("USD 0.00"));
     }
 
+    @Test
+    public void should_handle_attempt_to_place_an_empty_sell_order() throws Exception {
+
+        //Given
+        StockBroker broker = new StockBroker(mock(StockExchange.class));
+
+        //When
+        OrderSummary orderSummary = broker.place(new ArrayList<>());
+
+        //Then
+        assertThat(orderSummary.sellTotal()).isEqualTo(Money.parse("USD 0.00"));
+    }
+
 }
