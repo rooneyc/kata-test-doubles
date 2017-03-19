@@ -13,6 +13,6 @@ public class StockBroker {
     }
 
     public OrderSummary place(List<Order> orders) {
-        throw new RuntimeException("Implement me, please...");
+        return null;
     }
 }
