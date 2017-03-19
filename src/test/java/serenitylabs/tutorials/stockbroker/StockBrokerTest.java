@@ -7,7 +7,9 @@ import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.exchange.StockExchange;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -80,6 +82,24 @@ public class StockBrokerTest {
 
         //Then
         assertThat(summary.sellTotal()).isEqualTo(Money.parse("USD 43894.4"));
+    }
+
+    @Test
+    public void should_be_able_to_place_a_double_sell_order() throws Exception {
+
+        //Given
+        List<Order> orders = Arrays.asList(
+            new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell),
+            new Order("ORCL", 1000, Money.parse("USD 42.69"), OrderType.Sell)
+        );
+        StockBroker broker = new StockBroker(mock(StockExchange.class));
+
+        //When
+        OrderSummary summary = broker.place(orders);
+
+        //Then
+        assertThat(summary.sellTotal()).isEqualTo(Money.parse("USD 86584.40"));
+
     }
 
 }
