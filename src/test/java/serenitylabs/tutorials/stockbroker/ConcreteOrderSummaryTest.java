@@ -18,4 +18,15 @@ public class ConcreteOrderSummaryTest {
 
     }
 
+    @Test
+    public void should_have_an_initial_sellTotal_of_zero() throws Exception {
+
+        //When
+        ConcreteOrderSummary summary = new ConcreteOrderSummary();
+
+        //Then
+        assertThat(summary.sellTotal()).isEqualTo(Money.parse("USD 0.00"));
+
+    }
+
 }
