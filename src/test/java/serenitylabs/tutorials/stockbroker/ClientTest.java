@@ -8,6 +8,7 @@ import serenitylabs.tutorials.stockbroker.parser.OrderParser;
 
 import java.util.Collections;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -19,15 +20,15 @@ public class ClientTest {
 
         //Given
         String order = "GOOG 300 829.08 B";
-        OrderParser parser = mock(OrderParser.class);
-        StockBroker broker = mock(StockBroker.class);
-        Client client = new Client(broker, parser);
+        OrderParser mockParser = mock(OrderParser.class);
+        StockBroker mockBroker = given(mock(StockBroker.class).place(any())).willReturn(new ConcreteOrderSummary().withBuyTotal(any())).getMock();
+        Client client = new Client(mockBroker, mockParser);
 
         //When
         client.place(order);
 
         //Then
-        verify(parser).parse(order);
+        verify(mockParser).parse(order);
     }
 
     @Test
@@ -36,16 +37,15 @@ public class ClientTest {
         //Given
         String order = "GOOG 300 829.08 B";
         Order parsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
-        OrderParser parser = mock(OrderParser.class);
-        given(parser.parse(order)).willReturn(Collections.singletonList(parsedOrder));
-        StockBroker broker = mock(StockBroker.class);
-        Client client = new Client(broker, parser);
+        OrderParser mockParser = given(mock(OrderParser.class).parse(order)).willReturn(Collections.singletonList(parsedOrder)).getMock();
+        StockBroker mockBroker = given(mock(StockBroker.class).place(any())).willReturn(new ConcreteOrderSummary().withBuyTotal(any())).getMock();
+        Client client = new Client(mockBroker, mockParser);
 
         //When
         client.place(order);
 
         //Then
-        verify(broker).place(Collections.singletonList(parsedOrder));
+        verify(mockBroker).place(Collections.singletonList(parsedOrder));
     }
 
 }
