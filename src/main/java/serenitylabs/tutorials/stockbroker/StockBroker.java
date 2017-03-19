@@ -19,7 +19,11 @@ public class StockBroker {
             return new ConcreteOrderSummary();
         }
 
-        return new ConcreteOrderSummary().withBuyTotal(Money.parse("USD 248724.00"));
+        int quantity = orders.get(0).quantity();
+        Money orderPrice = orders.get(0).price();
+        Money totalPrice = orderPrice.multipliedBy(quantity);
+
+        return new ConcreteOrderSummary().withBuyTotal(totalPrice);
     }
 
 
