@@ -1,31 +1,32 @@
 package serenitylabs.tutorials.stockbroker;
 
-import org.junit.Ignore;
+import org.joda.money.Money;
 import org.junit.Test;
+import serenitylabs.tutorials.stockbroker.exchange.Order;
+import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import java.util.Collections;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class ClientTest {
 
     @Test
-    public void should_be_able_to_place_an_empty_order() throws Exception {
+    public void should_ask_stock_broker_to_place_order() throws Exception {
 
         //Given
-        Client client = new Client(null, null);
+        String order = "GOOG 300 829.08 B";
+        Order parsedOrder = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
+        StockBroker broker = mock(StockBroker.class);
+        Client client = new Client(broker, null);
 
         //When
-        String summary = client.place("");
+        String summary = client.place(order);
 
         //Then
-        assertThat(summary).isEqualTo("Buy: USD 0.00, Sell: USD 0.00");
+        verify(broker).place(Collections.singletonList(parsedOrder));
     }
 
-    @Test
-    @Ignore("Implement me, please ...")
-    public void should_be_able_to_place_a_single_order() throws Exception {
 
-        Client client = new Client(null, null);
-
-        assertThat(client.place("GOOG 300 829.08 B")).isEqualTo("Buy: USD 248724.00, Sell: USD 0.00");
-    }
 }
