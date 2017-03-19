@@ -75,4 +75,17 @@ public class StockBrokerIntTest {
         assertThat(output).isEqualTo("Buy: USD 0.00, Sell: USD 86584.40");
     }
 
+    @Test
+    public void should_be_able_to_place_a_double_buy_order() throws Exception {
+
+        //Given
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
+
+        //When
+        String output = terminal.execute("ZNGA 1300 2.78 B,AAPL 50 139.78 B");
+
+        //Then
+        assertThat(output).isEqualTo("Buy: USD 54497.40, Sell: USD 0.00");
+    }
+
 }
