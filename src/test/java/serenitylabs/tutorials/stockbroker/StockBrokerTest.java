@@ -89,8 +89,8 @@ public class StockBrokerTest {
 
         //Given
         List<Order> orders = Arrays.asList(
-            new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell),
-            new Order("ORCL", 1000, Money.parse("USD 42.69"), OrderType.Sell)
+                new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell),
+                new Order("ORCL", 1000, Money.parse("USD 42.69"), OrderType.Sell)
         );
         StockBroker broker = new StockBroker(mock(StockExchange.class));
 
@@ -99,6 +99,24 @@ public class StockBrokerTest {
 
         //Then
         assertThat(summary.sellTotal()).isEqualTo(Money.parse("USD 86584.40"));
+
+    }
+
+    @Test
+    public void should_be_able_to_place_a_double_buy_order() throws Exception {
+
+        //Given
+        List<Order> orders = Arrays.asList(
+                new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy),
+                new Order("AAPL", 50, Money.parse("USD 139.78"), OrderType.Buy)
+        );
+        StockBroker broker = new StockBroker(mock(StockExchange.class));
+
+        //When
+        OrderSummary summary = broker.place(orders);
+
+        //Then
+        assertThat(summary.buyTotal()).isEqualTo(Money.parse("USD 10603.00"));
 
     }
 
