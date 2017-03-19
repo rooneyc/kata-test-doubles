@@ -14,21 +14,6 @@ public class StockBroker {
     }
 
     public OrderSummary place(List<Order> orders) {
-        return new OrderSummary() {
-            @Override
-            public Money buyTotal() {
-                return Money.parse("USD 0.00");
-            }
-
-            @Override
-            public Money sellTotal() {
-                return Money.parse("USD 0.00");
-            }
-
-            @Override
-            public List<Order> failedOrders() {
-                return null;
-            }
-        };
+        return new ConcreteOrderSummary();
     }
 }
