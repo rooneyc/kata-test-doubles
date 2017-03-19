@@ -11,13 +11,13 @@ public class Client {
         this.parser = parser;
     }
 
-    public String place(String orders) {
+    String place(String orders) {
 
         if (orders.isEmpty()) {
             return "Buy: USD 0.00, Sell: USD 0.00";
-        } else
-            return "Buy: USD 248724.00, Sell: USD 0.00";
+        }
 
+        return "Buy: USD 248724.00, Sell: USD 0.00";
 
     }
 }
