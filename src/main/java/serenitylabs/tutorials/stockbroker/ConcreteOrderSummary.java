@@ -9,7 +9,7 @@ public class ConcreteOrderSummary implements OrderSummary{
 
     @Override
     public Money buyTotal() {
-        return null;
+        return Money.parse("USD 0.00");
     }
 
     @Override
