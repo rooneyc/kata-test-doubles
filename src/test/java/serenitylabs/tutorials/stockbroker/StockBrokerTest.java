@@ -2,9 +2,12 @@ package serenitylabs.tutorials.stockbroker;
 
 import org.joda.money.Money;
 import org.junit.Test;
+import serenitylabs.tutorials.stockbroker.exchange.Order;
+import serenitylabs.tutorials.stockbroker.exchange.OrderType;
 import serenitylabs.tutorials.stockbroker.exchange.StockExchange;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -35,6 +38,20 @@ public class StockBrokerTest {
 
         //Then
         assertThat(orderSummary.sellTotal()).isEqualTo(Money.parse("USD 0.00"));
+    }
+
+    @Test
+    public void should_be_able_to_place_a_single_buy_order() throws Exception {
+
+        //Given
+        Order order = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
+        StockBroker broker = new StockBroker(mock(StockExchange.class));
+
+        //When
+        OrderSummary summary = broker.place(Collections.singletonList(order));
+
+        //Then
+        assertThat(summary.buyTotal()).isEqualTo(Money.parse("USD 248724.00"));
     }
 
 }
