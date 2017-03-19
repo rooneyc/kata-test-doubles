@@ -85,7 +85,7 @@ public class StockBrokerIntTest {
         String output = terminal.execute("ZNGA 1300 2.78 B,AAPL 50 139.78 B");
 
         //Then
-        assertThat(output).isEqualTo("Buy: USD 54497.40, Sell: USD 0.00");
+        assertThat(output).isEqualTo("Buy: USD 10603.00, Sell: USD 0.00");
     }
 
 }
