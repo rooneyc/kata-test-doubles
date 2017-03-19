@@ -41,7 +41,7 @@ public class StockBrokerTest {
     }
 
     @Test
-    public void should_be_able_to_place_a_single_buy_order() throws Exception {
+    public void should_be_able_to_place_a_single_buy_order_scenario1() throws Exception {
 
         //Given
         Order order = new Order("GOOG", 300, Money.parse("USD 829.08"), OrderType.Buy);
@@ -52,6 +52,20 @@ public class StockBrokerTest {
 
         //Then
         assertThat(summary.buyTotal()).isEqualTo(Money.parse("USD 248724.00"));
+    }
+
+    @Test
+    public void should_be_able_to_place_a_single_buy_order_scenario2() throws Exception {
+
+        //Given
+        Order order = new Order("ZNGA", 1300, Money.parse("USD 2.78"), OrderType.Buy);
+        StockBroker broker = new StockBroker(mock(StockExchange.class));
+
+        //When
+        OrderSummary summary = broker.place(Collections.singletonList(order));
+
+        //Then
+        assertThat(summary.buyTotal()).isEqualTo(Money.parse("USD 3614.00"));
     }
 
 }

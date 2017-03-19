@@ -43,7 +43,7 @@ public class StockBrokerIntTest {
         StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
 
         //When
-        String output = terminal.execute("ZNGA 1300 2.78 Bca");
+        String output = terminal.execute("ZNGA 1300 2.78 B");
 
         //Then
         assertThat(output).isEqualTo("Buy: USD 3614.00, Sell: USD 0.00");
