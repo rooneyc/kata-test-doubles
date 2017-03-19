@@ -24,7 +24,7 @@ public class ClientTest {
         Client client = new Client(broker, parser);
 
         //When
-        String summary = client.place(order);
+        client.place(order);
 
         //Then
         verify(parser).parse(order);
@@ -42,7 +42,7 @@ public class ClientTest {
         Client client = new Client(broker, parser);
 
         //When
-        String summary = client.place(order);
+        client.place(order);
 
         //Then
         verify(broker).place(Collections.singletonList(parsedOrder));
