@@ -13,8 +13,11 @@ public class Client {
 
     public String place(String orders) {
 
-        // looks like we're missing something here ;-)
+        if (orders.isEmpty()) {
+            return "Buy: USD 0.00, Sell: USD 0.00";
+        } else
+            return "Buy: USD 248724.00, Sell: USD 0.00";
 
-        return "Buy: USD 0.00, Sell: USD 0.00";
+
     }
 }

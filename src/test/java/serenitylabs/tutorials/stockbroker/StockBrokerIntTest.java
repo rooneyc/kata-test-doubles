@@ -6,7 +6,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class StockBrokerIntTest {
 
-
     @Test
     public void should_be_able_to_place_an_empty_order() {
 
