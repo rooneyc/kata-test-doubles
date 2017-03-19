@@ -7,9 +7,11 @@ import java.util.List;
 
 public class ConcreteOrderSummary implements OrderSummary{
 
+    Money buyTotal = Money.parse("USD 0.00");
+
     @Override
     public Money buyTotal() {
-        return Money.parse("USD 0.00");
+        return buyTotal;
     }
 
     @Override
@@ -20,5 +22,10 @@ public class ConcreteOrderSummary implements OrderSummary{
     @Override
     public List<Order> failedOrders() {
         return null;
+    }
+
+    ConcreteOrderSummary withBuyTotal (Money buyTotal) {
+        this.buyTotal = buyTotal;
+        return this;
     }
 }
