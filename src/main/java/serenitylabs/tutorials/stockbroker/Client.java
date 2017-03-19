@@ -23,7 +23,7 @@ public class Client {
         List<Order> orderList = parser.parse(orders);
         OrderSummary summary = broker.place(orderList);
 
-        return "Buy: USD 248724.00, Sell: USD 0.00";
+        return "Buy: " + summary.buyTotal() + ", " + "Sell: " + summary.sellTotal();
 
     }
 }
