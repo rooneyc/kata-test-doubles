@@ -22,7 +22,7 @@ public class StockBroker {
 
             @Override
             public Money sellTotal() {
-                return null;
+                return Money.parse("USD 0.00");
             }
 
             @Override
