@@ -1,10 +1,11 @@
 package serenitylabs.tutorials.stockbroker;
 
+import org.joda.money.CurrencyUnit;
 import org.junit.Test;
-import serenitylabs.tutorials.stockbroker.parser.OrderParser;
+import serenitylabs.tutorials.stockbroker.exchange.StockExchange;
+import serenitylabs.tutorials.stockbroker.parser.OptimisticOrderParser;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class StockBrokerIntTest {
 
@@ -26,9 +27,7 @@ public class StockBrokerIntTest {
     public void should_be_able_to_place_a_single_order_scenario1() throws Exception {
 
         //Given
-        OrderParser parser = mock(OrderParser.class);
-        StockBroker broker = mock(StockBroker.class);
-        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(broker, parser));
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
 
         //When
         String output = terminal.execute("GOOG 300 829.08 B");
@@ -41,9 +40,7 @@ public class StockBrokerIntTest {
     public void should_be_able_to_place_a_single_order_scenario2() throws Exception {
 
         //Given
-        OrderParser parser = mock(OrderParser.class);
-        StockBroker broker = mock(StockBroker.class);
-        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(broker, parser));
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), new OptimisticOrderParser(CurrencyUnit.of("USD"))));
 
         //When
         String output = terminal.execute("ZNGA 1300 2.78 Bca");
