@@ -15,7 +15,8 @@ public class ClientTest {
         //Given
         String order = "GOOG 300 829.08 B";
         OrderParser mockParser = mock(OrderParser.class);
-        Client client = new Client(null, mockParser);
+        StockBroker mockBroker = mock(StockBroker.class);
+        Client client = new Client(mockBroker, mockParser);
 
         //When
         client.place(order);

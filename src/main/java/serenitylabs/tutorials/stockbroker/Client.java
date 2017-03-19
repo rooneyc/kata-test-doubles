@@ -17,6 +17,7 @@ public class Client {
     public String place(String orders) {
 
         List<Order> orderList = parser.parse(orders);
+        OrderSummary summary = broker.place(orderList);
 
         return "Buy: USD 0.00, Sell: USD 0.00";
     }
