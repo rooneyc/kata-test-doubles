@@ -1,5 +1,6 @@
 package serenitylabs.tutorials.stockbroker;
 
+import org.joda.money.Money;
 import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.exchange.StockExchange;
 
@@ -13,6 +14,21 @@ public class StockBroker {
     }
 
     public OrderSummary place(List<Order> orders) {
-        return null;
+        return new OrderSummary() {
+            @Override
+            public Money buyTotal() {
+                return Money.parse("USD 0.00");
+            }
+
+            @Override
+            public Money sellTotal() {
+                return null;
+            }
+
+            @Override
+            public List<Order> failedOrders() {
+                return null;
+            }
+        };
     }
 }
