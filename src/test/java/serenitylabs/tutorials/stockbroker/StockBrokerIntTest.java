@@ -13,7 +13,7 @@ public class StockBrokerIntTest {
     public void should_be_able_to_place_an_empty_order() {
 
         //Given
-        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(null, null));
+        StockBrokerTerminal terminal = new StockBrokerTerminal(new Client(new StockBroker(new StockExchange()), mock(OrderParser.class)));
 
         //When
         String output = terminal.execute("");

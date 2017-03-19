@@ -1,6 +1,9 @@
 package serenitylabs.tutorials.stockbroker;
 
+import serenitylabs.tutorials.stockbroker.exchange.Order;
 import serenitylabs.tutorials.stockbroker.parser.OrderParser;
+
+import java.util.List;
 
 public class Client {
     private final StockBroker broker;
@@ -13,7 +16,7 @@ public class Client {
 
     public String place(String orders) {
 
-        // looks like we're missing something here ;-)
+        List<Order> orderList = parser.parse(orders);
 
         return "Buy: USD 0.00, Sell: USD 0.00";
     }
