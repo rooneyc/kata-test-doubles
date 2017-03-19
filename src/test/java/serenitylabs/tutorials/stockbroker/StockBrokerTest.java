@@ -68,4 +68,18 @@ public class StockBrokerTest {
         assertThat(summary.buyTotal()).isEqualTo(Money.parse("USD 3614.00"));
     }
 
+    @Test
+    public void should_be_able_to_place_a_single_sell_order_scenario1() throws Exception {
+
+        //Given
+        Order order = new Order("FB", 320, Money.parse("USD 137.17"), OrderType.Sell);
+        StockBroker broker = new StockBroker(mock(StockExchange.class));
+
+        //When
+        OrderSummary summary = broker.place(Collections.singletonList(order));
+
+        //Then
+        assertThat(summary.sellTotal()).isEqualTo(Money.parse("USD 43894.4"));
+    }
+
 }
