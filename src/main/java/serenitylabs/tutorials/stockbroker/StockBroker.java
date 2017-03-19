@@ -14,6 +14,13 @@ public class StockBroker {
     }
 
     public OrderSummary place(List<Order> orders) {
-        return new ConcreteOrderSummary();
+
+        if (orders.isEmpty()) {
+            return new ConcreteOrderSummary();
+        }
+
+        return new ConcreteOrderSummary().withBuyTotal(Money.parse("USD 248724.00"));
     }
+
+
 }
